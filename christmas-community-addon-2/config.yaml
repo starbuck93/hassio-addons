@@ -29,5 +29,5 @@ options:
 schema:
   TABLE_MODE: bool
   SINGLE_LIST_MODE: bool
-  GUEST_PASSWORD: string
-  SITE_TITLE: string
+  GUEST_PASSWORD: str
+  SITE_TITLE: str
