@@ -47,6 +47,8 @@ jobs:
           context: christmas-community-addon/
           platforms: linux/${{ matrix.arch }}
           push: ${{ github.event_name != 'pull_request' }}
+          build-args: |
+            BUILD_FROM=ghcr.io/home-assistant/${{ matrix.arch }}-base:3.20
           tags: |
             ghcr.io/${{ github.repository }}/christmas-community:${{ matrix.arch }}-${{ github.sha }}
             ghcr.io/${{ github.repository }}/christmas-community:${{ matrix.arch }}-latest
