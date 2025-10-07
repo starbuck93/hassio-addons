@@ -1,0 +1,23 @@
+---
+configuration:
+  TABLE:
+    name: Table Mode
+    description: >-
+      Defaults to true. Set to false for legacy cards view.
+
+  SINGLE_LIST_MODE: 
+    name: Single List Mode
+    description: >-
+      Set to true to not allow users to have their own lists. You may want this for a birthday or wedding.
+
+  GUEST_PASSWORD: 
+    name: Guest Password
+    description: >-
+      Password to enter guest mode,
+      e.g. https://wishes.example.com?pw=ReplaceWithYourGuestPassword
+  
+  SITE_TITLE:
+    name: 
+    description: >-
+      The name of the site in the <title> and navigation bar
+  

@@ -1,9 +1,9 @@
 # Add-on metadata
 name: Christmas Community 2
-version: "1.0.1"
+version: "1.0.2"
 slug: christmas-community-2
 description: A simple, self-hosted Wish list app
-url: "https://github.com/wingysam/christmas-community"
+url: "https://github.com/starbuck93/hassio-addons"
 arch:
   - aarch64
   - amd64
@@ -22,12 +22,12 @@ map:
 
 # User-configurable options
 options:
-  TABLE_MODE: true
+  TABLE: true
   SINGLE_LIST_MODE: false
   GUEST_PASSWORD: password
   SITE_TITLE: Wish List
 schema:
-  TABLE_MODE: bool
+  TABLE: bool
   SINGLE_LIST_MODE: bool
   GUEST_PASSWORD: str
   SITE_TITLE: str
