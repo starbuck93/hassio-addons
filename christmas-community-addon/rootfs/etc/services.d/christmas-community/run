@@ -1,0 +1,48 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the Christmas Community service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+# Set environment variables from addon configuration
+export PORT=$(bashio::addon.port)
+export DB_PREFIX=$(bashio::addon.db_prefix)
+export DB_LOG_FILE=$(bashio::addon.db_log_file)
+export SESSION_MAX_AGE=$(bashio::addon.session_max_age)
+export SITE_TITLE=$(bashio::addon.site_title)
+export SHORT_TITLE=$(bashio::addon.short_title)
+export ROOT_URL=$(bashio::addon.root_url)
+export BULMASWATCH=$(bashio::addon.bulmaswatch)
+export LANGUAGE=$(bashio::addon.language)
+export UPLOAD_PFP_MAX_SIZE=$(bashio::addon.upload_pfp_max_size)
+
+# Feature toggles
+export TABLE=$(bashio::addon.table)
+export SINGLE_LIST=$(bashio::addon.single_list)
+export LISTS_PUBLIC=$(bashio::addon.lists_public)
+export MARKDOWN=$(bashio::addon.markdown)
+export PFP=$(bashio::addon.pfp)
+export UPDATE_CHECK=$(bashio::addon.update_check)
+
+# Set default values for optional environment variables
+export TRUST_PROXY="loopback"
+export SECRET_DIRNAME="/data"
+export DEFAULT_FAILURE_REDIRECT="/login"
+
+# Generate a random secret if not provided
+if [ -z "$SECRET" ]; then
+    SECRET=$(bashio::random.hex 32)
+    export SECRET
+fi
+
+# Set working directory
+cd /opt/app
+
+# Log startup information
+bashio::log.info "Starting Christmas Community..."
+bashio::log.info "Port: $PORT"
+bashio::log.info "Database: $DB_PREFIX"
+bashio::log.info "Site Title: $SITE_TITLE"
+
+# Start the application
+exec node built/manager.js

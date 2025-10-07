@@ -1,0 +1,65 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Christmas Community
+version: "1.41.0"
+slug: christmas-community
+description: "Christmas lists for communities - Web app for your family's Christmas shopping"
+url: "https://github.com/wingysam/Christmas-Community"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+map:
+  - share:rw
+  - config:rw
+options:
+  # Core Settings
+  site_title: "Christmas Community"
+  short_title: "Christmas"
+  root_url: "/"
+  port: 80
+  # Database settings
+  db_prefix: "/data/dbs/"
+  db_log_file: "/dev/null"
+  # Session settings
+  session_max_age: 604800000  # 1 week in milliseconds
+  # Feature toggles
+  table: true
+  single_list: false
+  lists_public: false
+  markdown: false
+  pfp: true
+  update_check: true
+  # Styling
+  bulmaswatch: "default"
+  # Language
+  language: "en-US"
+  # Upload settings
+  upload_pfp_max_size: 5
+schema:
+  # Core Settings
+  site_title: "str"
+  short_title: "str"
+  root_url: "str"
+  port: "int(1,65535)"
+  # Database settings
+  db_prefix: "str"
+  db_log_file: "str"
+  # Session settings
+  session_max_age: "int"
+  # Feature toggles
+  table: "bool"
+  single_list: "bool"
+  lists_public: "bool"
+  markdown: "bool"
+  pfp: "bool"
+  update_check: "bool"
+  # Styling
+  bulmaswatch: "str"
+  # Language
+  language: "str"
+  # Upload settings
+  upload_pfp_max_size: "int"
+image: "ghcr.io/starbuck93/{arch}-addon-christmas-community"

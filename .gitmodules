@@ -1,0 +1,3 @@
+[submodule "christmas-community-addon/src"]
+	path = christmas-community-addon/src
+	url = https://github.com/Wingysam/Christmas-Community.git
