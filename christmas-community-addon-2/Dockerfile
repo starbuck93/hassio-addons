@@ -1,0 +1,1 @@
+FROM wingysam/christmas-community:latest

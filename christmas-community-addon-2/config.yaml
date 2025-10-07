@@ -1,0 +1,33 @@
+# Add-on metadata
+name: Christmas Community
+version: "1.0.0"
+slug: christmas-community
+description: A simple, self-hosted Wish list app
+url: "https://github.com/wingysam/christmas-community"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+
+# Port mapping
+ports:
+  80/tcp: 8088 # Expose the container's port 80 to the host's port 8088
+ports_description:
+  80/tcp: Web interface for Christmas Community
+
+# Data mapping
+map:
+  - data:rw
+
+# User-configurable options
+options:
+  TABLE_MODE: true
+  SINGLE_LIST_MODE: false
+  GUEST_PASSWORD: password
+  SITE_TITLE: Wish List
+schema:
+  TABLE_MODE: bool
+  SINGLE_LIST_MODE: bool
+  GUEST_PASSWORD: string
+  SITE_TITLE: string
