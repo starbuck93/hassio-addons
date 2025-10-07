@@ -62,4 +62,4 @@ schema:
   language: "str"
   # Upload settings
   upload_pfp_max_size: "int"
-image: "ghcr.io/starbuck93/{arch}-addon-christmas-community"
+# image: "ghcr.io/starbuck93/{arch}-addon-christmas-community"

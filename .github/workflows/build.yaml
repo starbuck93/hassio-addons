@@ -1,0 +1,59 @@
+name: Build and Publish Christmas Community Add-on
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'christmas-community-addon/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'christmas-community-addon/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [amd64, armhf, armv7, aarch64, i386]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/christmas-community
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: christmas-community-addon/
+          platforms: linux/${{ matrix.arch }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ghcr.io/${{ github.repository }}/christmas-community:${{ matrix.arch }}-${{ github.sha }}
+            ghcr.io/${{ github.repository }}/christmas-community:${{ matrix.arch }}-latest
+          labels: |
+            org.opencontainers.image.title=Christmas Community Add-on
+            org.opencontainers.image.description=Christmas lists for communities - Web app for your family's Christmas shopping
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.licenses=AGPL-3.0
+            org.opencontainers.image.authors=Adam Starbuck
+            org.opencontainers.image.url=https://github.com/wingysam/Christmas-Community
